@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavBar from "./components/NavBar";
 import Landing from "./pages/landing/Landing";
 import ChatPane from './pages/chat/ChatPane';
-
+import Audio from './pages/audio/Audio';
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />}/>
           <Route path="/chat" element={<ChatPane />}/>
+          <Route path="/audio" element={<Audio />}/>
         </Routes>
     </BrowserRouter>
   );
