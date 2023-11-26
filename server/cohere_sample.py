@@ -314,27 +314,29 @@ else:
 nltk.download()
 # end macos stuff
 
-documents = Documents(sources)
+# documents = Documents(sources)
 
 # flask functions
+
+chatbot = None
 
 
 def initDocuments(new_sources):
     docs = Documents(new_sources)
+    chatbot = Chatbot(docs)
     return docs
 
 
 def getResponse(message, docs):
-    chatbot = Chatbot(docs)
     response = chatbot.generate_response(message)
     return response
 
 
-# Create an instance of the Chatbot class with the Documents instance
-chatbot = Chatbot(documents)
+# # Create an instance of the Chatbot class with the Documents instance
+# chatbot = Chatbot(documents)
 
-# Create an instance of the App class with the Chatbot instance
-app = App(chatbot)
+# # Create an instance of the App class with the Chatbot instance
+# app = App(chatbot)
 
-# Run the chatbot
-app.run()
+# # Run the chatbot
+# app.run()
