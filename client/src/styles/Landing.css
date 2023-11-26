@@ -25,8 +25,8 @@
 }
 .header img {
   position: absolute;
-  right: 0px;
-  width: 800px;
+  right: 20px;
+  width: 750px;
   z-index: 0;
   bottom: -20px;
 }

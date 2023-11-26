@@ -38,7 +38,7 @@
   color: black;
   font-family: Articulat;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
 }
 
@@ -64,7 +64,7 @@
   justify-content: space-evenly;
   align-items: center;
 
-  .link {
+  a {
     text-decoration: none;
     position: relative;
 
@@ -99,4 +99,9 @@ a {
   .active {
     fill: black;
   }
+}
+
+.right-bar a.active {
+  text-decoration: underline;
+  color: black;
 }

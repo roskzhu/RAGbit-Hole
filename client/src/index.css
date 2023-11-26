@@ -4,6 +4,14 @@
   font-style: normal;
   src: url("../public/fonts/Fontspring-DEMO-articulatcf-regular.otf")  format("opentype");
 }
+
+@font-face {
+  font-family: "Articulat";
+  font-weight: 600;
+  font-style: normal;
+  src: url("../public/fonts/Fontspring-DEMO-articulatcf-bold.otf")  format("opentype");
+}
+
 @font-face {
   font-family: "Helvetica Now";
   font-weight: 400;
