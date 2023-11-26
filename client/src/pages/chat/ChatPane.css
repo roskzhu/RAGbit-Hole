@@ -103,3 +103,12 @@
 .basic-button:hover {
   background-color: #ff9e3ddd;
 }
+
+.audioButton {
+  background: linear-gradient(90deg, rgba(109, 149, 237, 0.8), rgba(231, 123, 240, 0.8));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin-right: 10px; /* Add margin to separate the buttons */
+  cursor: pointer;
+}
