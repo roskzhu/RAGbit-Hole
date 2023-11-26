@@ -26,6 +26,7 @@
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   border: 1px solid rgb(163, 163, 163);
   border-radius: 13px;
+  background: #E2E2E2;
 
 
   display: flex;
@@ -53,6 +54,8 @@
   border: 1px solid rgb(163, 163, 163);
   margin-left:10px;
   border-radius: 13px;
+  background: #E2E2E2;
+
   
   width: 75vw;
   height: 35px;
