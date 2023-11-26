@@ -7,7 +7,7 @@ const Landing = () => {
   return (
     <div className='landing-container'>
       <Header />
-      <Carousel speed="25" direction="right" className='dance'>
+      <Carousel speed="50" direction="right" className='dance'>
         <div className="contentBlock contentBlock--one">
           <img src='/demo1.png' className="scroller-photo"/>
         </div>

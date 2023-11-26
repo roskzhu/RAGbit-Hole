@@ -12,7 +12,7 @@
   width: 100%;
   overflow: hidden;
   background-color: #1A1A1B;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 
 .looper__innerList {
@@ -32,6 +32,6 @@
 }
 
 .contentBlock img {
-  height: 500px;
+  height: 350px;
   transition: transform 0.3s, filter 0.3s;
 }

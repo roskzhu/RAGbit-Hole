@@ -25,8 +25,8 @@
 }
 .header img {
   position: absolute;
-  right: 55px;
-  width: 1100px;
+  right: 0px;
+  width: 800px;
   z-index: 0;
   bottom: -20px;
 }
@@ -44,13 +44,14 @@
 
 .text-container h1 {
   line-height: 1.4;
-  font-size: 94px;
+  font-size: 70px;
   margin-bottom: 2px;
   font-weight: 500;
+  padding-top: 60px;
 }
 
 .text-container p {
-  font-size: 22px;
+  font-size: 16px;
   margin-bottom: 60px;
   font-weight: 400;
   color: grey;
@@ -58,15 +59,15 @@
   line-height: 1.5;
 }
 .text-container button {
-  border: 3px solid black;
-  width: 220px;
+  border: 2px solid black;
+  width: 140px;
   background-color: #222222;
   border-radius: 35px;
   color: black;
-  padding: 16px;
-  font-size: 20px;
-  padding-left: 47px;
-  padding-right: 47px;
+  padding: 10px;
+  font-size: 14px;
+  padding-left: 27px;
+  padding-right: 27px;
   font-weight: 700;
   cursor: pointer;
   transition: background 0.5s;
