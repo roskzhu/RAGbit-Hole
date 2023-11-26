@@ -7,6 +7,7 @@ import time
 import generate_questions as questions
 import assemblyai as aai
 import os
+import json
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -16,7 +17,7 @@ app = Flask(__name__)
 # CORS(app, resources={r"/download_mp3": {"origins": "*"}, r"/get_question": {"origins": "*"}, r"/feedback": {"origins": "*"}})
 
 # Initialize the Google Cloud Storage client
-# storage_client = storage.Client()
+storage_client = storage.Client()
 
 yapping_sources = []
 
@@ -104,8 +105,8 @@ def download_mp3():
     blob = bucket.blob(blob_name)
     print(f"got blob: {blob}, getting webm")
     print("getting aai")
-    transcript = transcriber.transcribe("https://storage.googleapis.com/rabbithole-406318.appspot.com/audio.webm")
-    print("got response, getting text")
+    transcript = transcriber.transcribe("https://storage.cloud.google.com/rabbithole-406318.appspot.com/audio.webm")
+    print(f"got response, getting text, {transcript}")
     text = transcript.text
     print(f"text: {text}")
 
@@ -116,7 +117,7 @@ def download_mp3():
     #INSERT APPENDING TO GLOBAL SOURCES
     transcribed = {
                     "title": f"User-Recorded File TRANSCRIPT: {text}",
-                    "url": f"https://storage.googleapis.com/rabbithole-406318.appspot.com/audio_{epoch_time}.webm"
+                    "url": f"https://storage.cloud.google.com/rabbithole-406318.appspot.com/audio.webm"
                 }
     global yapping_sources
     yapping_sources.append(transcribed)
