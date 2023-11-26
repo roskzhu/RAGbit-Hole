@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react"
 import "./ChatPane.css"
 import { BsTrash3Fill } from "react-icons/bs"
 import { PiPaperPlaneTiltFill } from "react-icons/pi"
-import {Link } from "react-router-dom";
-import { FaFileVideo } from "react-icons/fa";
+import { Link } from "react-router-dom"
+import { FaFileVideo } from "react-icons/fa"
 
 const ChatPane = () => {
   const [message, setMessage] = useState("")
@@ -72,19 +72,26 @@ const ChatPane = () => {
                       <div>{response.content.text}</div>
                       <div className="links">
                         <div className="link-header">
-                          Dive down the rabbit hole; Topics:
+                          Dive down the rabbit hole...
                         </div>
+                        {/* <div>{JSON.stringify(response.content)}</div> */}
                         {response.content.citations.map((citation, i1) => {
                           return (
                             <div className="citation-flex">
-                              {citation.text}:
+                              <span>{citation.text}</span>
                               {citation.document_ids.map((id, i2) => {
-                                const doc = response.documents.find(
+                                const doc = response.content.documents.find(
                                   (doc) => doc.id === id
                                 )
                                 return (
                                   <div className="citation-flex link-clr">
-                                    <a href={doc.url}>[{i2}]</a>
+                                    <a
+                                      href={
+                                        doc.url + "#:~:text=" + citation.text
+                                      }
+                                    >
+                                      [{i2}]
+                                    </a>
                                   </div>
                                 )
                               })}
@@ -103,13 +110,12 @@ const ChatPane = () => {
         </div>
       </div>
       <div className="form-container">
-        
         <form className="input-area" onSubmit={handleSendMessage}>
-        <Link to="/audio">
-          <button className="audioButton">
-          <FaFileVideo size={24}/>
-          </button>
-        </Link>
+          {/* <Link to="/audio">
+            <button className="audioButton">
+              <FaFileVideo size={24} />
+            </button>
+          </Link> */}
 
           <input
             type="text"
