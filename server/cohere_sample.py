@@ -1,5 +1,5 @@
-import nltk
-import ssl
+#import nltk
+#import ssl
 
 import cohere
 import os
@@ -57,16 +57,19 @@ class Documents:
         print("Loading documents...")
 
         for source in self.sources:
-            elements = partition_html(url=source["url"])
-            chunks = chunk_by_title(elements)
-            for chunk in chunks:
-                self.docs.append(
-                    {
-                        "title": source["title"],
-                        "text": str(chunk),
-                        "url": source["url"],
-                    }
-                )
+            try:
+                elements = partition_html(url=source["url"])
+                chunks = chunk_by_title(elements)
+                for chunk in chunks:
+                    self.docs.append(
+                        {
+                            "title": source["title"],
+                            "text": str(chunk),
+                            "url": source["url"],
+                        }
+                    )
+            except:
+                print(f"Failed on URL {source}")
 
     def embed(self) -> None:
         """
@@ -191,7 +194,7 @@ class Chatbot:
                 message=message,
                 documents=documents,
                 conversation_id=self.conversation_id,
-                stream=True,
+                stream=False,
             )
             for event in response:
                 yield event
@@ -201,7 +204,7 @@ class Chatbot:
             response = co.chat(
                 message=message,
                 conversation_id=self.conversation_id,
-                stream=True
+                stream=False
             )
             for event in response:
                 yield event
@@ -304,6 +307,7 @@ sources = [
 ]
 
 # start macos stuff
+"""
 try:
     _create_unverified_https_context = ssl._create_unverified_context
 except AttributeError:
@@ -312,23 +316,30 @@ else:
     ssl._create_default_https_context = _create_unverified_https_context
 
 nltk.download()
+"""
 # end macos stuff
 
 # documents = Documents(sources)
 
 # flask functions
 
-chatbot = None
+global chatbot
+docs = None
 
 
 
 def initDocuments(new_sources):
+    global chatbot
     docs = Documents(new_sources)
+    print("Completed")
     chatbot = Chatbot(docs)
+    print("Chatbot has been initialized")
     return docs
 
 
-def getResponse(message, docs):
+def getResponse(message):
+    global chatbot
+    print("Running request for getting response")
     response = chatbot.generate_response(message)
     return response
 
