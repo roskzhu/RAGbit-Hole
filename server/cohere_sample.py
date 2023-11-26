@@ -1,5 +1,5 @@
-#import nltk
-#import ssl
+# import nltk
+# import ssl
 
 import cohere
 import os
@@ -210,8 +210,9 @@ class Chatbot:
                 conversation_id=self.conversation_id,
                 stream=False,
             )
-            for event in response:
-                yield event
+            # for event in response:
+            #     yield event
+            return response
 
         # If there is no search query, directly respond
         else:
@@ -220,8 +221,9 @@ class Chatbot:
                 conversation_id=self.conversation_id,
                 stream=False
             )
-            for event in response:
-                yield event
+            # for event in response:
+            #     yield event
+            return response
 
     def retrieve_docs(self, response) -> List[Dict[str, str]]:
         """
@@ -339,7 +341,6 @@ nltk.download()
 
 global chatbot
 docs = None
-
 
 
 def initDocuments(new_sources):
