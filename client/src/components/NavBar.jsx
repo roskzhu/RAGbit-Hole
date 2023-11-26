@@ -14,12 +14,16 @@ const NavBar = () => {
       </div>
       <div className="right-container">
         <div className="right-bar">
-          <p>
-            Home
-          </p>
-          <p>
-            Try Now
-          </p>
+          <a href="/">
+            <p>
+              Home
+            </p>
+          </a>
+          <a href="/chat">
+            <p>
+              Try Now
+            </p>
+          </a>
         </div>
       </div>
     </div>

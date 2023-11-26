@@ -78,7 +78,10 @@
   }
 }
 
+a {
+  text-decoration: none;
 
+}
 
 .right-bar p {
   font-family: Articulat;
