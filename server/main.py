@@ -1,29 +1,29 @@
+import cohere_sample as bot
 from flask import Flask, jsonify
 from serp import SerpGenerator
 from flask import Flask, request
 from flask_cors import CORS
-from google.cloud import storage
+# from google.cloud import storage
 import time
 import generate_questions as questions
-import assemblyai as aai
+# import assemblyai as aai
 import os
 import json
 from dotenv import load_dotenv
 load_dotenv()
 
-import cohere_sample as bot
 
 app = Flask(__name__)
 # CORS(app, resources={r"/download_mp3": {"origins": "*"}, r"/get_question": {"origins": "*"}, r"/feedback": {"origins": "*"}})
 
 # Initialize the Google Cloud Storage client
-storage_client = storage.Client()
+# storage_client = storage.Client()
 
-yapping_sources = []
+# yapping_sources = []
 
 # Create a transcriber object.
 
-aai.settings.api_key = os.environ["AAI_API_KEY"]
+# aai.settings.api_key = os.environ["AAI_API_KEY"]
 
 # Create a transcriber object.
 
@@ -93,40 +93,44 @@ def get_response():
 
     return ret
 
-@app.route('/download_mp3', methods=['POST'])
-def download_mp3():
-    transcriber = aai.Transcriber()
-    bucket_name = "rabbithole-406318.appspot.com"
-    blob_name = "audio.webm"
-    # Get the bucket and blob
-    print("getting bucket")
-    bucket = storage_client.get_bucket(bucket_name)
-    print(f"got bucket: {bucket}, getting blob")
-    blob = bucket.blob(blob_name)
-    print(f"got blob: {blob}, getting webm")
-    print("getting aai")
-    transcript = transcriber.transcribe("https://storage.cloud.google.com/rabbithole-406318.appspot.com/audio.webm")
-    print(f"got response, getting text, {transcript}")
-    text = transcript.text
-    print(f"text: {text}")
 
-    epoch_time = str(int(time.time()))
-    new_blob_name = f'audio_{epoch_time}.webm'
-    print(f"renaming file to {new_blob_name}")
-    bucket.rename_blob(blob, new_blob_name)
-    #INSERT APPENDING TO GLOBAL SOURCES
-    transcribed = {
-                    "title": f"User-Recorded File TRANSCRIPT: {text}",
-                    "url": f"https://storage.cloud.google.com/rabbithole-406318.appspot.com/audio.webm"
-                }
-    global yapping_sources
-    yapping_sources.append(transcribed)
-    return jsonify({"response": text})
+# @app.route('/download_mp3', methods=['POST'])
+# def download_mp3():
+#     transcriber = aai.Transcriber()
+#     bucket_name = "rabbithole-406318.appspot.com"
+#     blob_name = "audio.webm"
+#     # Get the bucket and blob
+#     print("getting bucket")
+#     bucket = storage_client.get_bucket(bucket_name)
+#     print(f"got bucket: {bucket}, getting blob")
+#     blob = bucket.blob(blob_name)
+#     print(f"got blob: {blob}, getting webm")
+#     print("getting aai")
+#     transcript = transcriber.transcribe(
+#         "https://storage.cloud.google.com/rabbithole-406318.appspot.com/audio.webm")
+#     print(f"got response, getting text, {transcript}")
+#     text = transcript.text
+#     print(f"text: {text}")
 
-@app.route('/see_user_inputs', methods=['GET','POST'])
-def see_user_inputs():
-    global yapping_sources
-    return jsonify({"response": yapping_sources})
+#     epoch_time = str(int(time.time()))
+#     new_blob_name = f'audio_{epoch_time}.webm'
+#     print(f"renaming file to {new_blob_name}")
+#     bucket.rename_blob(blob, new_blob_name)
+#     # INSERT APPENDING TO GLOBAL SOURCES
+#     transcribed = {
+#         "title": f"User-Recorded File TRANSCRIPT: {text}",
+#         "url": f"https://storage.cloud.google.com/rabbithole-406318.appspot.com/audio.webm"
+#     }
+#     global yapping_sources
+#     yapping_sources.append(transcribed)
+#     return jsonify({"response": text})
+
+
+# @app.route('/see_user_inputs', methods=['GET', 'POST'])
+# def see_user_inputs():
+#     global yapping_sources
+#     return jsonify({"response": yapping_sources})
+
 
 if __name__ == '__main__':
     app.run(debug=True)

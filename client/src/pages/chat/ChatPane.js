@@ -6,63 +6,8 @@ import { PiPaperPlaneTiltFill } from "react-icons/pi"
 const ChatPane = () => {
   const [message, setMessage] = useState("")
   const [responses, setResponses] = useState([])
-  console.log("initialization")
-  console.log(responses)
-  console.log(message)
 
-  const getChatHistory = async () => {
-    // Get request for past convo
-    //   const response = await fetch(`http://127.0.0.1:5000/chatHistory/get-chat-history/` + fileName, {
-    //     method: 'GET',
-    //     headers: {
-    //       'Authorization': `Bearer ${localStorage.getItem('token')}`,
-    //       'Content-Type': 'application/json',
-    //     }
-    //   });
-
-    //   if (!response.ok) {
-    //     throw new Error('Network response was not ok');
-    //   }
-
-    //const responseData = await response.json();
-    //Sample chat history
-    const responseData = {
-      chatHistory: [
-        {
-          sender: "user",
-          content: "Hi, bot. How are you today?",
-        },
-        {
-          sender: "bot",
-          content: "Hello! I'm doing well, thank you for asking.",
-        },
-        {
-          sender: "user",
-          content: "I have a question about your services.",
-        },
-        {
-          sender: "bot",
-          content: "Sure, go ahead and ask your question.",
-        },
-      ],
-    }
-
-    console.log("Response chat history", responseData)
-
-    // Since responseData is an array, map over it directly
-    const formattedResponses = responseData.chatHistory.map(
-      (message, index) => {
-        const sender = index % 2 === 0 ? "user" : "bot" // Alternate between 'user' and 'bot'
-        return { sender, content: message.content }
-      }
-    )
-
-    setResponses(formattedResponses)
-  }
-
-  useEffect(() => {
-    getChatHistory()
-  }, [])
+  const [loading, setLoading] = useState(false)
 
   const handleSendMessage = async (event) => {
     event.preventDefault()
@@ -74,19 +19,7 @@ const ChatPane = () => {
     const userMessage = { sender: "user", content: message }
     setResponses((prevResponses) => [...prevResponses, userMessage])
     setMessage("")
-
-    // Add a loading message
-    const loadingMessage = {
-      sender: "bot",
-      content: (
-        <div className="typing-indicator">
-          <div className="dot"></div>
-          <div className="dot"></div>
-          <div className="dot"></div>
-        </div>
-      ),
-    }
-    setResponses((prevResponses) => [...prevResponses, loadingMessage])
+    setLoading(true)
 
     //Grab response from the API
     const response = await fetch(
@@ -107,19 +40,16 @@ const ChatPane = () => {
       throw new Error("Network response was not ok")
     }
 
-    // const responseData = {
-    //   role: "Bot",
-    //   response: "My response to your question",
-    // }
-
     const responseData = await response.json()
 
     // Remove the loading message and add the bot's response
     setResponses((prevResponses) => {
-      const updatedResponses = prevResponses.slice(0, -1) // Remove the last message (loading message)
+      const updatedResponses = [...prevResponses]
       updatedResponses.push({ sender: "bot", content: responseData }) // Add the bot's response
       return updatedResponses
     })
+
+    setLoading(false)
   }
 
   return (
@@ -133,31 +63,35 @@ const ChatPane = () => {
                   {response.sender === "bot" ? "Rabbit" : "You"}
                 </div>
                 {response.sender === "bot" ? (
-                  <>
-                    <div>{response.content.text}</div>
-                    <div className="links">
-                      <div className="link-header">
-                        Dive down the rabbit hole; Topics:
+                  loading ? (
+                    "..."
+                  ) : (
+                    <>
+                      <div>{response.content.text}</div>
+                      <div className="links">
+                        <div className="link-header">
+                          Dive down the rabbit hole; Topics:
+                        </div>
+                        {response.content.citations.map((citation, i1) => {
+                          return (
+                            <div className="citation-flex">
+                              {citation.text}:
+                              {citation.document_ids.map((id, i2) => {
+                                const doc = response.documents.find(
+                                  (doc) => doc.id === id
+                                )
+                                return (
+                                  <div className="citation-flex link-clr">
+                                    <a href={doc.url}>[{i2}]</a>
+                                  </div>
+                                )
+                              })}
+                            </div>
+                          )
+                        })}
                       </div>
-                      {response.content.citations.map((citation, i1) => {
-                        return (
-                          <div className="citation-flex">
-                            {citation.text}:
-                            {citation.document_ids.map((id, i2) => {
-                              const doc = response.documents.find(
-                                (doc) => doc.id === id
-                              )
-                              return (
-                                <div className="citation-flex link-clr">
-                                  <a href={doc.url}>[{i2}]</a>
-                                </div>
-                              )
-                            })}
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </>
+                    </>
+                  )
                 ) : (
                   response.content
                 )}
