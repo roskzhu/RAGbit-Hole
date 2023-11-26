@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 import cohere
+from serp import SerpGenerator
 from flask import Flask, request
 from flask_cors import CORS
 from google.cloud import storage
@@ -7,9 +8,6 @@ import time
 
 app = Flask(__name__)
 #CORS(app, resources={r"/download_mp3": {"origins": "*"}, r"/get_question": {"origins": "*"}, r"/feedback": {"origins": "*"}})
-
-question_spawned = ""
-feedback_master=""
 
 # Initialize the Google Cloud Storage client
 storage_client = storage.Client()
@@ -19,10 +17,26 @@ storage_client = storage.Client()
 @app.route('/', methods=['GET', 'POST'])
 def welcome():
     print("Hello Cohere!")
-    global feedback_master
-    feedback_master="initialized"
-    print(f"feedback_master: {feedback_master}")
     return "Hello Cohere!"
+
+
+@app.route('/initialize', methods=['GET', 'POST'])
+def initialize():
+    #Step 1: Scrape Links
+    serp = SerpGenerator()
+    print("Initialized SERP Generator, launching search")
+    results = serp.generate(request.args["query"])
+    print("Scraping links")
+    links = serp.get_links(results)
+    print(links)
+    #Step 2: Embed Everything
+
+    #should just return success
+    return links
+
+
+
+    
 
 
 if __name__ == '__main__':
