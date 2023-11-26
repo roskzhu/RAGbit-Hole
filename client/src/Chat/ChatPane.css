@@ -1,0 +1,54 @@
+.chat-pane {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* Or any other value you'd like */
+  width: 140vh;
+  border: 1px solid #FFF;
+  background: #1A1A1B;
+}
+
+.message {
+  max-width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+  color: #D1D1D1;
+  font-family: FONTSPRING DEMO - Articulat CF;
+}
+
+/* .message.user {
+  background-color: #F0F0F0;
+  align-self: flex-end;
+}
+
+.message.bot {
+  background-color: #ffffff;
+  align-self: flex-start;
+} */
+
+
+
+.input-area input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+
+
+
+.basic-button {
+  background-color: #181818;
+  color: #ff9e3d;
+  border: 2px solid #ff9e3d;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.basic-button:hover {
+  background-color: #ff9e3d;
+  color: white;
+}
