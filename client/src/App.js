@@ -1,13 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
-import ChatPane from './Chat/ChatPane';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import NavBar from "./components/NavBar";
+import Landing from "./pages/landing/Landing";
+import ChatPane from './pages/chat/ChatPane';
+
 
 function App() {
   return (
-    <div className="home-container">
-      <ChatPane/>
-    </div>
+    <BrowserRouter>
+        <NavBar/>
+        <Routes>
+          <Route path="/" element={<Landing />}/>
+          <Route path="/chat" element={<ChatPane />}/>
+        </Routes>
+    </BrowserRouter>
   );
 }
 
 export default App;
+
+//     <div className="home-container">
+//       <ChatPane/>
+
+//     <div className="App">
+//       <Landing/>
+//     </div>
