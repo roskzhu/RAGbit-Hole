@@ -58,16 +58,30 @@ class Documents:
 
         for source in self.sources:
             try:
-                elements = partition_html(url=source["url"])
-                chunks = chunk_by_title(elements)
-                for chunk in chunks:
-                    self.docs.append(
-                        {
-                            "title": source["title"],
-                            "text": str(chunk),
-                            "url": source["url"],
-                        }
-                    )
+                if source["title"].startswith("User-Recorded File"):
+                    # Find the index of "TRANSCRIPT" in the title
+                    transcript_index = source["title"].find("TRANSCRIPT")
+                    if transcript_index != -1:
+                        # Extract the text after "TRANSCRIPT"
+                        text_after_transcript = source["title"][transcript_index + len("TRANSCRIPT"):].strip()
+                        self.docs.append(
+                            {
+                                "title": "User-Recorded File",
+                                "text": text_after_transcript,
+                                "url": source["url"],
+                            }
+                        )
+                else:
+                    elements = partition_html(url=source["url"])
+                    chunks = chunk_by_title(elements)
+                    for chunk in chunks:
+                        self.docs.append(
+                            {
+                                "title": source["title"],
+                                "text": str(chunk),
+                                "url": source["url"],
+                            }
+                        )
             except:
                 print(f"Failed on URL {source}")
 

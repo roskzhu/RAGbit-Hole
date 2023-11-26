@@ -33,7 +33,7 @@ class SerpGenerator:
       }
       #Make the GET request to VALUE SERP
       api_result = requests.get('https://api.valueserp.com/search', params)
-      print(json.dumps(api_result.json()))
+      #print(json.dumps(api_result.json()))
       #Returns the JSON response from VALUE SERP
       return json.dumps(api_result.json())
 
