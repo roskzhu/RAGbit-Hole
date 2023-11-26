@@ -103,14 +103,13 @@ const ChatPane = () => {
         </div>
       </div>
       <div className="form-container">
-        
-        <form className="input-area" onSubmit={handleSendMessage}>
         <Link to="/audio">
           <button className="audioButton">
           <FaFileVideo size={24}/>
           </button>
         </Link>
-
+          
+        <form className="input-area" onSubmit={handleSendMessage}>
           <input
             type="text"
             value={message}
