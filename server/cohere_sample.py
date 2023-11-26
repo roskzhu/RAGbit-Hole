@@ -319,6 +319,7 @@ documents = Documents(sources)
 # flask functions
 
 
+
 def initDocuments(new_sources):
     docs = Documents(new_sources)
     return docs
