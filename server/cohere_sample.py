@@ -7,7 +7,12 @@ from typing import List, Dict
 from unstructured.partition.html import partition_html
 from unstructured.chunking.title import chunk_by_title
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 co = cohere.Client(os.environ["COHERE_API_KEY"])
+
 
 class Documents:
     """
@@ -71,7 +76,7 @@ class Documents:
         self.docs_len = len(self.docs)
 
         for i in range(0, self.docs_len, batch_size):
-            batch = self.docs[i : min(i + batch_size, self.docs_len)]
+            batch = self.docs[i: min(i + batch_size, self.docs_len)]
             texts = [item["text"] for item in batch]
             docs_embs_batch = co.embed(
                 texts=texts, model="embed-english-v3.0", input_type="search_document"
@@ -85,10 +90,12 @@ class Documents:
         print("Indexing documents...")
 
         self.idx = hnswlib.Index(space="ip", dim=1024)
-        self.idx.init_index(max_elements=self.docs_len, ef_construction=512, M=64)
+        self.idx.init_index(max_elements=self.docs_len,
+                            ef_construction=512, M=64)
         self.idx.add_items(self.docs_embs, list(range(len(self.docs_embs))))
 
-        print(f"Indexing complete with {self.idx.get_current_count()} documents.")
+        print(
+            f"Indexing complete with {self.idx.get_current_count()} documents.")
 
     def retrieve(self, query: str) -> List[Dict[str, str]]:
         """
@@ -132,7 +139,6 @@ class Documents:
             )
 
         return docs_retrieved
-
 
 
 class Chatbot:
@@ -191,8 +197,8 @@ class Chatbot:
         # If there is no search query, directly respond
         else:
             response = co.chat(
-                message=message, 
-                conversation_id=self.conversation_id, 
+                message=message,
+                conversation_id=self.conversation_id,
                 stream=True
             )
             for event in response:
@@ -226,7 +232,7 @@ class Chatbot:
         # print("\n")
 
         return retrieved_docs
-    
+
 
 class App:
     def __init__(self, chatbot: Chatbot):
@@ -238,7 +244,7 @@ class App:
 
         """
         self.chatbot = chatbot
-    
+
     def run(self):
         """
         Runs the chatbot application.
@@ -279,19 +285,20 @@ class App:
 # As an example, we'll use LLM University's Module 1: What are Large Language Models?
 # https://docs.cohere.com/docs/intro-large-language-models
 
+
 sources = [
     {
-        "title": "Text Embeddings", 
+        "title": "Text Embeddings",
         "url": "https://docs.cohere.com/docs/text-embeddings"},
     {
-        "title": "Similarity Between Words and Sentences", 
+        "title": "Similarity Between Words and Sentences",
         "url": "https://docs.cohere.com/docs/similarity-between-words-and-sentences"},
     {
-        "title": "The Attention Mechanism", 
+        "title": "The Attention Mechanism",
         "url": "https://docs.cohere.com/docs/the-attention-mechanism"},
     {
-        "title": "Transformer Models", 
-        "url": "https://docs.cohere.com/docs/transformer-models"}   
+        "title": "Transformer Models",
+        "url": "https://docs.cohere.com/docs/transformer-models"}
 ]
 
 documents = Documents(sources)
