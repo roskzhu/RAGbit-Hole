@@ -29,19 +29,19 @@ const ChatPane = () => {
     const responseData = {
       chatHistory: [
         {
-          sender: "sender-user",
+          sender: "user",
           content: "Hi, bot. How are you today?",
         },
         {
-          sender: "sender-bot",
+          sender: "bot",
           content: "Hello! I'm doing well, thank you for asking.",
         },
         {
-          sender: "sender-user",
+          sender: "user",
           content: "I have a question about your services.",
         },
         {
-          sender: "sender-bot",
+          sender: "bot",
           content: "Sure, go ahead and ask your question.",
         },
       ],
@@ -89,34 +89,35 @@ const ChatPane = () => {
     setResponses((prevResponses) => [...prevResponses, loadingMessage])
 
     //Grab response from the API
-    // try {
-    //     const response = await fetch(`http://127.0.0.1:5000/chat/get-response`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             query: message,
-    //         }),
-    //     });
+    const response = await fetch(
+      `http://127.0.0.1:5000/get_response?message=${userMessage.content}`,
+      {
+        method: "POST",
+        // headers: {
+        //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+        //   "Content-Type": "application/json",
+        // },
+        // body: JSON.stringify({
+        //   query: message,
+        // }),
+      }
+    )
 
-    //     if (!response.ok) {
-    //         throw new Error('Network response was not ok');
-    //     }
-
-    const responseData = {
-      role: "Bot",
-      response: "My response to your question",
+    if (!response.ok) {
+      throw new Error("Network response was not ok")
     }
 
-    // const responseData = await response.json();
-    const reply = responseData.response
+    // const responseData = {
+    //   role: "Bot",
+    //   response: "My response to your question",
+    // }
+
+    const responseData = await response.json()
 
     // Remove the loading message and add the bot's response
     setResponses((prevResponses) => {
       const updatedResponses = prevResponses.slice(0, -1) // Remove the last message (loading message)
-      updatedResponses.push({ sender: "bot", content: reply }) // Add the bot's response
+      updatedResponses.push({ sender: "bot", content: responseData }) // Add the bot's response
       return updatedResponses
     })
   }
@@ -131,7 +132,35 @@ const ChatPane = () => {
                 <div className="messenger-name">
                   {response.sender === "bot" ? "Rabbit" : "You"}
                 </div>
-                {response.content}
+                {response.sender === "bot" ? (
+                  <>
+                    <div>{response.content.text}</div>
+                    <div className="links">
+                      <div className="link-header">
+                        Dive down the rabbit hole; Topics:
+                      </div>
+                      {response.content.citations.map((citation, i1) => {
+                        return (
+                          <div className="citation-flex">
+                            {citation.text}:
+                            {citation.document_ids.map((id, i2) => {
+                              const doc = response.documents.find(
+                                (doc) => doc.id === id
+                              )
+                              return (
+                                <div className="citation-flex link-clr">
+                                  <a href={doc.url}>[{i2}]</a>
+                                </div>
+                              )
+                            })}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </>
+                ) : (
+                  response.content
+                )}
               </div>
             ))}
           {/* <div ref={messagesEndRef}></div> This is the dummy div */}
