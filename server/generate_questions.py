@@ -19,7 +19,5 @@ def get_questions(question):
     connectors=[{"id":"web-search"}],
     documents=[]
     ) 
-    print(json.dumps(response))
-    return response
-
-get_questions("what are the best animals ever")
+    print(json.dumps(response.text))
+    return response.text

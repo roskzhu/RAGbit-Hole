@@ -5,6 +5,7 @@ from flask import Flask, request
 from flask_cors import CORS
 from google.cloud import storage
 import time
+import generate_questions as questions
 
 app = Flask(__name__)
 #CORS(app, resources={r"/download_mp3": {"origins": "*"}, r"/get_question": {"origins": "*"}, r"/feedback": {"origins": "*"}})
@@ -17,7 +18,7 @@ storage_client = storage.Client()
 @app.route('/', methods=['GET', 'POST'])
 def welcome():
     print("Hello Cohere!")
-    return "Hello Cohere!"
+    return jsonify({"response":"Hello Cohere!"})
 
 
 @app.route('/initialize', methods=['GET', 'POST'])
@@ -32,7 +33,14 @@ def initialize():
     #Step 2: Embed Everything
 
     #should just return success
-    return links
+    return jsonify({"response":"success"})
+
+@app.route('/get_questions', methods=['GET', 'POST'])
+def get_questions():
+    initial_question = request.args["question"]
+    print("Getting questions")
+    response = questions.get_questions(initial_question)
+    return jsonify({"response": response})
 
 
 
