@@ -28,7 +28,7 @@ const InfiniteSlider = function InfiniteSlider({
     const { width } = innerRef.current.getBoundingClientRect();
 
     // If width is 0, set it to a default value (e.g., 500)
-    const defaultWidth = 500;
+    const defaultWidth = 800;
     const actualWidth = width === 0 ? defaultWidth : width;
 
     const { width: parentWidth } = outerRef.current.getBoundingClientRect();

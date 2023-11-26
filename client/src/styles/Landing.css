@@ -1,7 +1,7 @@
 .landing-container {
   background: linear-gradient(180deg, #DCDCDC 3.01%, #FDFDFD 99.63%);
   background-size: cover;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   flex-direction: column;
   overflow: hidden;

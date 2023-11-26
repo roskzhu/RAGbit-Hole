@@ -1,7 +1,4 @@
 import React from 'react'
-import styled from '@emotion/styled'
-import { keyframes } from '@emotion/react';
-import { useNavigate } from 'react-router-dom';
 import '../../styles/Landing.css'
 
 const Header = () => {

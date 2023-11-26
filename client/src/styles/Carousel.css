@@ -11,6 +11,8 @@
 .looper {
   width: 100%;
   overflow: hidden;
+  background-color: #1A1A1B;
+  padding-top: 20px;
 }
 
 .looper__innerList {
