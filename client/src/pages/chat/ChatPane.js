@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import "./ChatPane.css"
 import { BsTrash3Fill } from "react-icons/bs"
 import { PiPaperPlaneTiltFill } from "react-icons/pi"
+import {Link } from "react-router-dom";
+import { FaFileVideo } from "react-icons/fa";
 
 const ChatPane = () => {
   const [message, setMessage] = useState("")
@@ -139,6 +141,12 @@ const ChatPane = () => {
       </div>
       <div className="form-container">
         <form className="input-area" onSubmit={handleSendMessage}>
+          <Link to="/audio">
+            <button className="audioButton">
+            <FaFileVideo size={24}/>
+            </button>
+          </Link>
+          
           <input
             type="text"
             value={message}
