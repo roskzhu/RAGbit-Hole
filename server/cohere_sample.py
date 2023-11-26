@@ -1,3 +1,6 @@
+import nltk
+import ssl
+
 import cohere
 import os
 import hnswlib
@@ -6,7 +9,6 @@ import uuid
 from typing import List, Dict
 from unstructured.partition.html import partition_html
 from unstructured.chunking.title import chunk_by_title
-
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -300,6 +302,17 @@ sources = [
         "title": "Transformer Models",
         "url": "https://docs.cohere.com/docs/transformer-models"}
 ]
+
+# start macos stuff
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
+nltk.download()
+# end macos stuff
 
 documents = Documents(sources)
 
