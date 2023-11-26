@@ -15,7 +15,6 @@ feedback_master=""
 storage_client = storage.Client()
 
 # Create a transcriber object.
-transcriber = aai.Transcriber()
 
 @app.route('/', methods=['GET', 'POST'])
 def welcome():
