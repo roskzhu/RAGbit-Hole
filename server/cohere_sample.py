@@ -316,6 +316,20 @@ nltk.download()
 
 documents = Documents(sources)
 
+# flask functions
+
+
+def initDocuments(new_sources):
+    docs = Documents(new_sources)
+    return docs
+
+
+def getResponse(message, docs):
+    chatbot = Chatbot(docs)
+    response = chatbot.generate_response(message)
+    return response
+
+
 # Create an instance of the Chatbot class with the Documents instance
 chatbot = Chatbot(documents)
 
