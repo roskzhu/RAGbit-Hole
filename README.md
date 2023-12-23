@@ -10,8 +10,6 @@
     <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54ite"/>
     <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
     <img src="https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white"/>
-    <img src="https://img.shields.io/badge/cohere-%23000.svg?style=for-the-badge&logo=cohere&logoColor=white"/>
-    <img src="https://img.shields.io/badge/assemblyai-%23000.svg?style=for-the-badge&logo=assemblyai&logoColor=white"/>
     <br><br>
 </div>
 
