@@ -17,7 +17,6 @@
 </div>
 
 ![home](https://github.com/roskzhu/RAGbit-Hole/assets/110139243/556aea5a-b107-4ec0-9fac-279560b6fb0c)
-![image](https://github.com/roskzhu/RAGbit-Hole/assets/110139243/d15d7b79-6b6c-47bc-8143-159da8a849c7)
 
 
 ## What is CollaboraCart?
@@ -58,4 +57,4 @@ _(localhost:3000 by default)_
 1. `npm start`
 
 ### Preview
-<img src="https://github.com/ericcxie/OptiWealth/assets/66566975/450e0bc0-4d73-4e5e-931e-cb5b4a30dc48" width="45%"></img> <img src="https://github.com/ericcxie/OptiWealth/assets/66566975/ab5512af-ebb6-493b-a778-84e7b3fd6d0d" width="45%"></img> <img src="https://github.com/ericcxie/OptiWealth/assets/66566975/38bb3f7a-9dd5-453f-b522-f732e8857717" width="45%"></img> <img src="https://github.com/ericcxie/OptiWealth/assets/66566975/dec3e907-e192-4118-a3d7-298d6af084f2" width="45%"></img> <img src="https://github.com/ericcxie/OptiWealth/assets/66566975/68acb3d6-d023-4a77-b350-bafdee0cb695" width="45%"></img> <img src="https://github.com/ericcxie/OptiWealth/assets/66566975/8eedb38d-2293-4ebd-882f-4f4faa4db2f2" width="45%"></img> 
+![image](https://github.com/roskzhu/RAGbit-Hole/assets/110139243/d15d7b79-6b6c-47bc-8143-159da8a849c7)
