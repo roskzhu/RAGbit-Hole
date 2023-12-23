@@ -5,12 +5,11 @@
       </ul>
     </div>
     <h3>Rabbit-hole into Your Favourite Topics With Our Chatbot</h3>
-    <h4><i>Optimize your per-unit costs, elevate your bottom line</i></h4>
        <br>
     <img src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white"/>
     <img src="https://img.shields.io/badge/python-%23000.svg?style=for-the-badge&logo=python&logoColor=white"/>
     <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
-    <img src="https://img.shields.io/badge/google-cloud-%23000.svg?style=for-the-badge&logo=google-cloud&logoColor=white"/>
+![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white)
     <img src="https://img.shields.io/badge/cohere-%23000.svg?style=for-the-badge&logo=cohere&logoColor=white"/>
     <img src="https://img.shields.io/badge/assemblyai-%23000.svg?style=for-the-badge&logo=assemblyai&logoColor=white"/>
     <br><br>
@@ -34,7 +33,14 @@ Before you begin, ensure you have met the following requirements:
 ## Architecture Overview
 ![image](https://github.com/roskzhu/RAGbit-Hole/assets/110139243/ff03e2de-e1fb-4692-b30a-fd0bbeaf474a)
 
-
+## Architecture Overview
+Built with: 
+- Google Cloud
+- Python (Flask)
+- React.js
+- AssemblyAI
+- Cohere
+  
 ## Getting Started
 
 ### Starting the server
